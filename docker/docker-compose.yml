@@ -1,0 +1,132 @@
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.5
+    platform: linux/arm64
+    build:
+      context: ./elasticsearch
+    environment:
+      - cluster.name=${CLUSTER_NAME}
+      - discovery.seed_hosts=elasticsearch
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "XPACK_MONITORING_ENABLED=true"
+      - "XPACK_MONITORING_COLLECTION_ENABLED=true"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - 9200:9200
+      - 9300:9300
+    hostname: elasticsearch
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cat/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.17.5
+    platform: linux/arm64
+    hostname: logstash
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_USER: "$ELASTIC_USER"
+      ELASTIC_PASSWORD: "$ELASTIC_PASSWORD"
+      XPACK_MONITORING_ELASTICSEARCH_USERNAME: "$ELASTIC_USER"
+      XPACK_MONITORING_ELASTICSEARCH_PASSWORD: "$ELASTIC_PASSWORD"
+      XPACK_MONITORING_ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+      XPACK_MONITORING_ENABLED: "true"
+    restart: on-failure
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    hostname: kibana
+    image: docker.elastic.co/kibana/kibana:7.17.5
+    platform: linux/arm64
+    environment:
+      - "LOGGING_QUIET=true"
+      - "XPACK_MONITORING_UI_CONTAINER_ELASTICSEARCH_ENABLED=true"
+      - "XPACK_MONITORING_COLLECTION_ENABLED=true"
+      - "ELASTICSEARCH_HOSTS=http://elasticsearch:9200"
+    restart: on-failure
+    volumes:
+      - ./kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+    depends_on:
+      - elasticsearch
+    ports:
+      - 5601:5601
+
+  springbootapp:
+    hostname: springbootapp
+    image: romanconverter/springbootapp
+    platform: linux/arm64
+    build:
+      context: ../
+      dockerfile: docker/springboot/Dockerfile
+      args:
+        - "JAR_PATH=target/$ROMANCONVERTER_JAR_NAME"
+        - "AGENT_JAR_PATH=target/opentelemetry-javaagent.jar"
+    environment:
+      - "HOST_IP=logstash"
+      - "JAR_NAME=$ROMANCONVERTER_JAR_NAME"
+      - "JVM_OPTIONS=-javaagent:/usr/src/app/opentelemetry-javaagent.jar"
+      - "OTEL_SERVICE_NAME=romanconverter-service"
+      - "OTEL_EXPORTER_OTLP_ENDPOINT=http://opentelemetry-collector:4317"
+      - "OTEL_METRICS_EXPORTER=otlp"
+    ports:
+      - 8080:8080
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+      - logstash
+      - opentelemetry-collector
+
+  prometheus:
+    image: prom/prometheus:v2.33.5
+    platform: linux/arm64
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    hostname: prometheus
+
+  grafana:
+    image: grafana/grafana:8.4.3
+    platform: linux/arm64
+    build:
+      context: ./grafana
+      dockerfile: Dockerfile
+    depends_on:
+      - prometheus
+    environment:
+      - "GF_SECURITY_ADMIN_USER=admin"
+      - "GF_SECURITY_ADMIN_PASSWORD=Hello@123"
+    hostname: grafana
+    ports:
+      - '3000:3000'
+
+  opentelemetry-collector:
+    image: otel/opentelemetry-collector:0.56.0
+    platform: linux/arm64
+    ports:
+      - "4317:4317"       # gRPC for OTLP
+      - "13133:13133"     # Health check endpoint
+      - "8889:8889"       # Prometheus metrics exporter
+    volumes:
+      - ./opentelemetry-collector/otel-collector-config.yml:/etc/otel-collector-config.yml:ro
+    command: ["--config", "/etc/otel-collector-config.yml"]
+    depends_on:
+      - elasticsearch
+
+
+networks:
+  default:
+    driver: bridge

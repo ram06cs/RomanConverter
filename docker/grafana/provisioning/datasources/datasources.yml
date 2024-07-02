@@ -1,0 +1,10 @@
+# prometheus is the datasource for grafana
+datasources:
+  - name: 'prometheus'
+    type: 'prometheus'
+    access: 'proxy'
+    org_id: 1
+    url: 'http://prometheus:9090'
+    is_default: true
+    version: 1
+    editable: true

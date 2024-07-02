@@ -1,0 +1,22 @@
+#default setting for receivers
+receivers:
+  otlp:
+    protocols:
+      http: {}
+      grpc: {}
+
+#default setting for processing
+processors:
+  batch: {}
+
+#output to prometheus
+exporters:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [prometheus]
