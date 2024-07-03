@@ -42,10 +42,9 @@ The RomanConverter project utilizes several components for robust functionality,
 
 
 
-
 **Logging Architecture**
 
-![spring_elk_image.png](..%2FFiles_needed%2Fspring_elk_image.png)
+![Spring ELK Image](screenshots/spring_elk_image.png)
 
 
 **Logstash**
@@ -82,7 +81,7 @@ The RomanConverter project utilizes several components for robust functionality,
 
 **Metrics Architecture**
 
-![spring_actutator_grafana.png](..%2FFiles_needed%2Fspring_actutator_grafana.png)
+![spring_actutator_grafana.png](screenshots/spring_actutator_grafana.png)
 
 **Prometheus**
 
@@ -105,7 +104,7 @@ The RomanConverter project utilizes several components for robust functionality,
 
 **Monitoring Architecture**
 
-![otel-grafana.png](..%2FFiles_needed%2Fotel-grafana.png)
+![otel-grafana.png](screenshots/otel-grafana.png)
 
 **OpenTelemetry**
 
