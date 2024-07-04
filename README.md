@@ -7,19 +7,18 @@ RomanConverter is a Spring Boot application that converts numbers to Roman numer
    - **Email:** ram.06cs@gmail.com 
 
 ## Table of Contents
-- 1 [Project Overview](#Project Overview)
-     - 1.1 [Logging Architecture](#Logging Architecture)
-     - 1.2 [Metrics Architecture](#Metrics Architecture)
-     - 1.3 [Monitoring Architecture](#Monitoring Architecture)
-- 2 [Getting Started](#Getting Started)
+- 1 [Project Overview](#Project-Overview)
+     - 1.1 [Logging Architecture](#Logging-Architecture)
+     - 1.2 [Metrics Architecture](#Metrics-Architecture)
+     - 1.3 [Monitoring Architecture](#Monitoring-Architecture)
+- 2 [Getting Started](#Getting-Started)
     - 2.1 [Prerequisites](#Prerequisites)
-    - 2.2 [Cloning the Repository](#Cloning the Repository)
-    - 2.3 [Installation](#Installation) 
-- 3 [Service Endpoints](#Service Endpoints)
-- 4 [Application Usage and Monitoring](#Application Usage and Monitoring)  
-- 5 [Running Test Suite](#Running Test Suite)
-- 6 [Shutting Down the Services](#Shutting Down the Services)
-- 7 [**Project Structure**](#**Project Structure**)
+    - 2.2 [Installation](#Installation) 
+- 3 [Service Endpoints](#Service-Endpoints)
+- 4 [Application Usage and Monitoring](#Application-Usage-and-Monitoring)  
+- 5 [Running Test Suite](#Running-Test-Suite)
+- 6 [Shutting Down the Services](#Shutting-Down-the-Services)
+- 7 [Project Structure](#Project-Structure)
 - 8 [References](#References)
 
 
