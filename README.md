@@ -584,6 +584,7 @@ RomanConverter
 - Spring Boot
   - https://spring.io/guides/gs/securing-web
   - https://spring.io/guides/gs/testing-web
+  - https://junit.org/junit5/docs/snapshot/user-guide/#writing-tests-assertions
 - Docker
   - https://docs.spring.io/spring-boot/how-to/docker-compose.html
 - OpenTelemetry
