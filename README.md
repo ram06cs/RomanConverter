@@ -94,15 +94,12 @@ The RomanConverter project utilizes several components for robust functionality,
 
     Description: Open-source systems monitoring and alerting toolkit
 
-    Role: Prometheus scrapes metrics from below 
+    Role: Prometheus scrapes metrics from
+       1.Spring Boot Actuator (http://localhost:8080/actuator)  
+         Metrics like application JVM metrics, HTTP request statistics
 
-    Spring Boot Actuator:
-    Endpoint: http://localhost:8080/actuator/prometheus
-    Metrics include application JVM metrics, HTTP request statistics
-
-    OpenTelemetry:
-    Endpoint: http://localhost:4317
-    Metrics include CPU usage, Memory usage and other performance metrics
+       2. OpenTelemetry (http://localhost:4317)
+          Metrics like CPU usage, Memory usage and other performance metrics
     
     Key Features:
       Efficient storage and retrieval of time-series data
