@@ -23,11 +23,8 @@ public class SecurityConfig {
     private String password;
 
     private static final String[] AUTH_WHITELIST = {
-            "/v3/api-docs/**",
-            "/swagger-ui/**",
-            "/swagger-resources/**",
-            "/webjars/**",
-            "/actuator/**"
+            "/actuator/**",
+            // other public endpoints
     };
 
     @Bean
