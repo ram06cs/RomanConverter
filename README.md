@@ -7,22 +7,26 @@ RomanConverter is a Spring Boot application that converts numbers to Roman numer
    - **Email:** ram.06cs@gmail.com 
 
 ## Table of Contents
-- 1 [Project Overview](#Project-Overview)
-     - 1.1 [Logging Architecture](#Logging-Architecture)
-     - 1.2 [Metrics Architecture](#Metrics-Architecture)
-     - 1.3 [Monitoring Architecture](#Monitoring-Architecture)
-- 2 [Getting Started](#Getting-Started)
-    - 2.1 [Prerequisites](#Prerequisites)
-    - 2.2 [Installation](#Installation) 
-- 3 [Service Endpoints](#Service-Endpoints)
-- 4 [Application Usage and Monitoring](#Application-Usage-and-Monitoring)  
-- 5 [Running Test Suite](#Running-Test-Suite)
-- 6 [Shutting Down the Services](#Shutting-Down-the-Services)
-- 7 [Project Structure](#Project-Structure)
-- 8 [References](#References)
+1. [Project Overview](#project-overview)
+   - 1.1 [Logging Architecture](#logging-architecture)
+   - 1.2 [Metrics Architecture](#metrics-architecture)
+   - 1.3 [Monitoring Architecture](#monitoring-architecture)
+2. [Getting Started](#getting-started)
+   - 2.1 [Prerequisites](#prerequisites)
+   - 2.2 [Installation](#installation)
+3. [Service Endpoints](#service-endpoints)
+4. [Application Usage and Monitoring](#application-usage-and-monitoring)
+   - 4.1 [Access Application via REST Endpoint](#access-application-via-rest-endpoint)
+   - 4.2 [Access Swagger](#access-swagger)
+   - 4.3 [Access Prometheus](#access-prometheus)
+   - 4.4 [View Logs from Kibana](#view-logs-from-kibana)
+   - 4.5 [Monitoring Metrics via Grafana](#monitoring-metrics-via-grafana)
+5. [Running Test Suite](#running-test-suite)
+6. [Shutting Down the Services](#shutting-down-the-services)
+7. [Project Structure](#project-structure)
+8. [References](#references)
 
-
-## **Project Overview**
+## 1. **Project Overview**
   
 The RomanConverter project utilizes several components for robust functionality, monitoring, and logging. Below are concise descriptions of each component:
 
@@ -49,7 +53,7 @@ The RomanConverter project utilizes several components for robust functionality,
 
 
 
-**Logging Architecture**
+### 1.1 **Logging Architecture**
 
 ![Spring ELK Image](screenshots/spring_elk_image.png)
 
@@ -86,7 +90,7 @@ The RomanConverter project utilizes several components for robust functionality,
         Real-time visualization
 
 
-**Metrics Architecture**
+### 1.2 **Metrics Architecture**
 
 ![spring_actutator_grafana.png](screenshots/spring_actutator_grafana.png)
 
@@ -106,7 +110,7 @@ The RomanConverter project utilizes several components for robust functionality,
       Powerful query language (PromQL) for querying metrics
       Time series collection via pull model over HTTP
 
-**Monitoring Architecture**
+### 1.3 **Monitoring Architecture**
 
 ![otel-grafana.png](screenshots/otel-grafana.png)
 
@@ -134,9 +138,9 @@ The RomanConverter project utilizes several components for robust functionality,
 
 
 
-## **Getting Started**
+## 2. **Getting Started**
 
-## **Prerequisites**
+## 2.1 **Prerequisites**
 Ensure that the following software is installed on your system and environment variables are set
    - Java 17 or later
    - Apache Maven 3.9.4 or later
@@ -162,7 +166,7 @@ Additionally, make sure that the following ports are not used by other applicati
 
 This ensures that there are no port conflicts when starting the services.
 
-### **Installation Steps**
+### 2.2 **Installation Steps**
 
 
 1. Clone the Repository 
@@ -240,7 +244,7 @@ This ensures that there are no port conflicts when starting the services.
    Repeat the command until all containers are up and running.
 
 
-## **Service Endpoints**
+## 3. **Service Endpoints**
 
 - **Spring Boot Application:**
     - **Security Configuration:**
@@ -263,160 +267,153 @@ This ensures that there are no port conflicts when starting the services.
 - **Logstash**: `http://localhost:9600` 
 - **Grafana**: `http://localhost:3000` (credentials: `admin/Hello@123`)
 
+## 4. **Application Usage and Monitoring**
 
-## **Application Usage and Monitoring**
+### 4.1 **Access Application via REST Endpoint**
+<details>
+<summary>Click to expand API endpoint examples</summary>
 
-1. **Access the spring application using the REST endpoint**
-    <details>
-    <summary>Click to expand API endpoint examples</summary>
-        a. Valid input (75)
-    
-        ```sh
-        GET http://localhost:8080/romannumeral?query=75
-        Response:
-        {
-        "input": 75,
-        "romanResult": "LXXV"
-        }
-    
-        ```
-        b. Invalid input (0)
-    
-        ```sh
-        GET http://localhost:8080/romannumeral?query=0
-        Response:
-        {
-        "input": 0,
-        "errorInfo": {
+1. **Valid input (75)**
+
+    ```sh
+    GET http://localhost:8080/romannumeral?query=75
+    Response:
+    {
+      "input": 75,
+      "romanResult": "LXXV"
+    }    
+    ```
+
+2. **Invalid input (0)**
+
+    ```sh
+    GET http://localhost:8080/romannumeral?query=0
+    Response:
+    {
+      "input": 0,
+      "errorInfo": {
         "code": 101,
         "message": "Input is out of acceptable range. The valid range is from 1 to 2200000000"
-        }
-        }
-        ```
-    
-        c. Invalid number format (testabc):
-    
-        ```sh
-        GET http://localhost:8080/romannumeral?query=testabc
-        Response:
-        {
-        "errorInfo": {
+      }
+    }
+    ```
+
+3. **Invalid number format (testabc)**
+
+    ```sh
+    GET http://localhost:8080/romannumeral?query=testabc
+    Response:
+    {
+      "errorInfo": {
         "code": 102,
         "message": "Invalid number format"
-        }
-        }
-    
-        ```
-    
-       d. Negative input(-15):
-    
-        ```sh
-        GET http://localhost:8080/romannumeral?query=-15
-        Response:
-        {
-        "input": -15,
-        "errorInfo": {
+      }
+    }
+    ```
+
+4. **Negative input (-15)**
+
+    ```sh
+    GET http://localhost:8080/romannumeral?query=-15
+    Response:
+    {
+      "input": -15,
+      "errorInfo": {
         "code": 101,
         "message": "Input is out of acceptable range. The valid range is from 1 to 2200000000"
-        }
-        }
-    
-        ```
-    
-        e. Upper Boundary input(22000000001):
-    
-        ```sh
-        GET http://localhost:8080/romannumeral?query=22000000001
-        Response:
-        {
-        "input": 22000000001,
-        "errorInfo": {
+      }
+    }
+    ```
+
+5. **Upper Boundary input (22000000001)**
+
+    ```sh
+    GET http://localhost:8080/romannumeral?query=22000000001
+    Response:
+    {
+      "input": 22000000001,
+      "errorInfo": {
         "code": 101,
         "message": "Input is out of acceptable range. The valid range is from 1 to 2200000000"
-        }
-        }
-    
-        ```
+      }
+    }
+    ```
 
-      </details>
-    
-    
-2. **Access Swagger for the Spring Boot Application:**
-    - URL: `http://localhost:8080/swagger-ui/index.html`
-      - Log into swagger, click the GET request dropdown, and use the "Try it out" button to test the endpoint.
+</details>
 
-        ![Swagger1.png](screenshots/Swagger1.png)
-    
-          Swagger Response 
-      ![Swagger2.png](screenshots/Swagger2.png)
+### 4.2 **Access Swagger for the Spring Boot Application:**
+- URL: `http://localhost:8080/swagger-ui/index.html`
+   - Log into Swagger, click the GET request dropdown, and use the "Try it out" button to test the endpoint.
 
- 
-3. **Access Prometheus:**
-    - Login into : `http://localhost:9090/targets`
-    - Verify the targets(opentelemetry and springboot actuator) are UP.
-    
-         ![Prometheus_Targets.png](screenshots%2FPrometheus_Targets.png)
+![Swagger1.png](screenshots/Swagger1.png)
+![Swagger2.png](screenshots/Swagger2.png)
 
-4. **View logs from Kibana:**
-    a.**Access Kibana:**
-    - URL: `http://localhost:5601`
+### 4.3 **Access Prometheus:**
+- Login to: `http://localhost:9090/targets`
+- Verify the targets (OpenTelemetry and Spring Boot Actuator) are UP.
 
-    b.**Navigate to Index Patterns:**
-    - Click the hamburger menu (top left).
-    - Go to **Management** -> **Stack Management** -> **Kibana** -> **Index Patterns**.
-    - Click **Create index pattern**.
-    - Enter `romanlogs*` as the name.
-    - Select `@timestamp` for the timestamp field.
-    - Click **Create index pattern** 
-    - Verify if the pattern is created successfully.
+![Prometheus_Targets.png](screenshots/Prometheus_Targets.png)
 
-    d. **View Logs:**
-    - Click the hamburger menu.
-    - Go to **Discover** to see the logs.
+### 4.4 **View Logs from Kibana:**
 
-    - ![Kibana_roman_logs.png](screenshots%2FKibana_roman_logs.png)
+#### a. **Access Kibana:**
+- URL: `http://localhost:5601`
 
+#### b. **Navigate to Index Patterns:**
+- Click the hamburger menu (top left).
+- Go to **Management** -> **Stack Management** -> **Kibana** -> **Index Patterns**.
+- Click **Create index pattern**.
+- Enter `romanlogs*` as the name.
+- Select `@timestamp` for the timestamp field.
+- Click **Create index pattern**.
+- Verify if the pattern is created successfully.
 
-5. **Monitoring Metrics via Grafana:**
+#### c. **View Logs:**
+- Click the hamburger menu.
+- Go to **Discover** to see the logs.
 
-   a. **Access Grafana:**
-    - URL: `http://localhost:3000`
-    - Credentials: `admin/Hello@123`
-    - Dashboards like `opentelemetry_18812_jvm.json` and `springboot-stats-6756.json` have been pre-configured on startup.
-    - Follow the steps below for manual configuration if needed.
+![Kibana_roman_logs.png](screenshots/Kibana_roman_logs.png)
 
-   b. **Add Data Source:**
-    - Click the hamburger menu (top left).
-    - Go to **Configuration** -> **Data Sources**.
-    - Click **Add data source**.
-    - Select **Prometheus**.
-    - Enter the URL: `http://localhost:9090` for Prometheus.
-    - Click **Save & Test** to verify the connection.
+### 4.5 **Monitoring Metrics via Grafana:**
 
-   c. **Navigate to Dashboards:**
-    - Click the hamburger menu (top left).
-    - Go to **Dashboards** -> **New** -> **Import** -> **Upload dashboard JSON file**.
-    - Upload the `~./RomanConverter/docker/grafana/dashboards/opentelemetry_18812_jvm.json`.
-    - Click **Load**.
-    - Repeat the same steps to load:
-        - Upload the `~./RomanConverter/docker/grafana/dashboards/springboot-stats-6756.json`.
+#### a. **Access Grafana:**
+- URL: `http://localhost:3000`
+- Credentials: `admin/Hello@123`
+- Dashboards like `opentelemetry_18812_jvm.json` and `springboot-stats-6756.json` have been pre-configured on startup.
+- Follow the steps below for manual configuration if needed.
 
-   d. **Explore Metrics:**
-    - Go to **Dashboards**.
-    - The imported dashboards should now be available.
-    - Click each one of them and visualize the data as needed.
-    - **Spring Boot stastistics:**
-      ![grafana_spring_boot_1.png](screenshots%2Fgrafana_spring_boot_1.png)
-      ![grafana_spring_boot_2.png](screenshots%2Fgrafana_spring_boot_2.png)
-   
-    - **OpenTelemetry Monitoring:**
-      ![Grafana_OpenTelemetry_Metrics.png](screenshots%2FGrafana_OpenTelemetry_Metrics.png)
-      Additional dashboard IDs from the Grafana site can be utilized.
+#### b. **Add Data Source:**
+- Click the hamburger menu (top left).
+- Go to **Configuration** -> **Data Sources**.
+- Click **Add data source**.
+- Select **Prometheus**.
+- Enter the URL: `http://localhost:9090` for Prometheus.
+- Click **Save & Test** to verify the connection.
 
-   **NOTE:** Perform operations on the Spring application or let the application run for a few minutes to ensure the graphs are populated.
-   
+#### c. **Navigate to Dashboards:**
+- Click the hamburger menu (top left).
+- Go to **Dashboards** -> **New** -> **Import** -> **Upload dashboard JSON file**.
+- Upload the `~./RomanConverter/docker/grafana/dashboards/opentelemetry_18812_jvm.json`.
+- Click **Load**.
+- Repeat the same steps to load:
+   - Upload the `~./RomanConverter/docker/grafana/dashboards/springboot-stats-6756.json`.
 
-## **Running Test Suite**
+#### d. **Explore Metrics:**
+- Go to **Dashboards**.
+- The imported dashboards should now be available.
+- Click each one of them and visualize the data as needed.
+
+**Spring Boot Statistics:**
+![grafana_spring_boot_1.png](screenshots/grafana_spring_boot_1.png)
+![grafana_spring_boot_2.png](screenshots/grafana_spring_boot_2.png)
+
+**OpenTelemetry Monitoring:**
+![Grafana_OpenTelemetry_Metrics.png](screenshots/Grafana_OpenTelemetry_Metrics.png)
+Additional dashboard IDs from the Grafana site can be utilized.
+
+**NOTE:** Perform operations on the Spring application or let the application run for a few minutes to ensure the graphs are populated.
+
+## 5. **Running Test Suite**
 
 **Test Suite Overview**
 
@@ -475,7 +472,7 @@ The test suite includes the following types of tests:
     ```
 
 
-## **Shutting Down the Services**
+## 6. **Shutting Down the Services**
 
    Navigate to the Docker Compose Directory and execute the commands below to ensure all containers are stopped 
    ```sh
@@ -490,7 +487,7 @@ The test suite includes the following types of tests:
    ```
 
 
-## **Project Structure**
+## 7. **Project Structure**
 
 ```
 RomanConverter
@@ -582,7 +579,7 @@ RomanConverter
 ```
 
 
-## **References**
+## 8. **References**
 
 - Spring Boot
   - https://spring.io/guides/gs/securing-web
