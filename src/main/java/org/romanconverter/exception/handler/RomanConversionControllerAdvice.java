@@ -15,14 +15,14 @@ public class RomanConversionControllerAdvice {
     public ResponseEntity<RomanConversionResponse> handleRomanConversionException(RomanConversionException e) {
         ErrorCodeEnum errorCode = e.getErrorCodeEnum();
         ErrorInfo errorInfo = new ErrorInfo(errorCode.getErrorCode(), errorCode.getDescription());
-        RomanConversionResponse response = new RomanConversionResponse(e.getInput(), errorInfo);  // Pass the input
+        RomanConversionResponse response = new RomanConversionResponse(e.getInput(), errorInfo);
         return new ResponseEntity<>(response, errorCode.getHttpStatus());
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<RomanConversionResponse> handleException(Exception e) {
         ErrorInfo errorInfo = new ErrorInfo(500, "Internal Server Error");
-        RomanConversionResponse response = new RomanConversionResponse(null, errorInfo);  // No input for general exceptions
+        RomanConversionResponse response = new RomanConversionResponse(null, errorInfo);
         return ResponseEntity.status(500).body(response);
     }
 }

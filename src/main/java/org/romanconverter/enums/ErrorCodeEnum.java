@@ -1,9 +1,6 @@
 package org.romanconverter.enums;
 import org.springframework.http.HttpStatus;
 
-/**
-* This Enum class holds all the error scenarios that include an error code, error message & HTTP Status code.
-*/
 public enum ErrorCodeEnum {
 
     INPUT_EMPTY(100, "Input cannot be empty", HttpStatus.BAD_REQUEST),

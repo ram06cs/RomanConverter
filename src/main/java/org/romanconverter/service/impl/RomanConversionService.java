@@ -8,18 +8,36 @@ import java.util.TreeMap;
 
 /**
  *
- * Algorithm
+ *   Input : @number
+ *   Ouput : @return Roman Numeral in string that is equivalent to the given input number
  *
- * 1. We store the 14 possible roman numerals and its corresponding numbers in descending fashion in 2 different arrays
- * 2. Iterate through element in the numbers array from first to last
- *      - If the given number < element, move on to the next element in the array.
- *      - Else, we get the roman numeral for the given index from the romanNumerals[] and store in the result, also subtract the number with the element
+ *   Considerations:
+ *   1) number is passed from UI. But java has limitation for Integer data type. Integer data type is 4 byte and it cannot handle bigger numbers like 2,200,000,000.
+ *     So Long data is used to handle large numbers.
+ *
+ *   2) UTF-8 Vinculum Characters- In Roman numerals, a vinculum is a horizontal line placed above a numeral to indicate multiplication by 1,000. For example, V̅ (line over V) represents 5000.
+ *     The vinculum character is "\u0305" in Unicode
+ *    Reference link used : https://aceonlinetools.com/utility/number-to-roman-numeral-converter/
+ *
+ *    3) TreeMap is preferred since we need to iterate through keys in sorted order.
+ *
+ *
+ *
+ *
+ * Algorithm
+ * *
+ * 1. store the 37 possible roman numerals(for handling more than 2 billion numbers) and its corresponding numbers in descending order in a tree map(for its natural ordering of keys)
+ * 2. Iterate through treemap from highest to lowest key
+ *      - For each key (which represents a numerical value), the while loop checks if the remaining value is greater than or equal to the key.
+        - If remaining is less than the roman key, continue to the next smaller key.
+        - If remaining is greater than or equal to the key, it means the current key's Roman numeral should be appended to the result.
+ *  3. UTF-8 equivalent value is added in treemap. Browsers and notepads have UTF-8 support by default. The java file might show the overline differently.
  *
  * Time Complexity - O(1)
  * Space Complexity - O(1)
  *
- * @param number - Input Long
- * @return - Roman Numeral that is equivalent to the given input number
+ *
+ *
  */
 
 @Service

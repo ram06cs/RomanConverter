@@ -492,6 +492,7 @@ The test suite includes the following types of tests:
 ```
 RomanConverter
 ├── HELP.md
+├── README.md
 ├── docker
 │   ├── docker-compose.yml
 │   ├── elasticsearch
@@ -528,6 +529,17 @@ RomanConverter
 ├── mvnw
 ├── mvnw.cmd
 ├── pom.xml
+├── screenshots
+│   ├── Grafana_OpenTelemetry_Metrics.png
+│   ├── Kibana_roman_logs.png
+│   ├── Prometheus_Targets.png
+│   ├── Swagger1.png
+│   ├── Swagger2.png
+│   ├── grafana_spring_boot_1.png
+│   ├── grafana_spring_boot_2.png
+│   ├── otel-grafana.png
+│   ├── spring_actutator_grafana.png
+│   └── spring_elk_image.png
 ├── src
 │   ├── main
 │   │   ├── java
@@ -576,6 +588,83 @@ RomanConverter
 │       └── resources
 │           └── logback-test.xml
 └── target
+    ├── classes
+    │   ├── application-test.properties
+    │   ├── application.properties
+    │   ├── logback-spring.xml
+    │   └── org
+    │       └── romanconverter
+    │           ├── RomanConverterApplication.class
+    │           ├── config
+    │           │   ├── SecurityConfig.class
+    │           │   └── SwaggerConfig.class
+    │           ├── controller
+    │           │   └── RomanConversionController.class
+    │           ├── enums
+    │           │   └── ErrorCodeEnum.class
+    │           ├── exception
+    │           │   ├── RomanConversionException.class
+    │           │   └── handler
+    │           │       └── RomanConversionControllerAdvice.class
+    │           ├── model
+    │           │   ├── ErrorInfo.class
+    │           │   └── RomanConversionResponse.class
+    │           ├── service
+    │           │   ├── ConversionService.class
+    │           │   └── impl
+    │           │       └── RomanConversionService.class
+    │           └── validator
+    │               └── RomanConversionValidator.class
+    ├── generated-sources
+    │   └── annotations
+    ├── generated-test-sources
+    │   └── test-annotations
+    ├── maven-archiver
+    │   └── pom.properties
+    ├── maven-status
+    │   └── maven-compiler-plugin
+    │       ├── compile
+    │       │   └── default-compile
+    │       │       ├── createdFiles.lst
+    │       │       └── inputFiles.lst
+    │       └── testCompile
+    │           └── default-testCompile
+    │               ├── createdFiles.lst
+    │               └── inputFiles.lst
+    ├── opentelemetry-javaagent.jar
+    ├── roman-converter-2024.6.1.jar
+    ├── roman-converter-2024.6.1.jar.original
+    ├── site
+    │   └── surefire-report.html
+    ├── surefire-reports
+    │   ├── TEST-org.romanconverter.RomanConverterApplicationTests.xml
+    │   ├── TEST-org.romanconverter.controller.RomanConversionControllerTest.xml
+    │   ├── TEST-org.romanconverter.integration.ConversionIntegrationTest.xml
+    │   ├── TEST-org.romanconverter.service.RomanConversionServiceTest.xml
+    │   ├── TEST-org.romanconverter.validator.ConversionValidatorTest.xml
+    │   ├── org.romanconverter.RomanConverterApplicationTests.txt
+    │   ├── org.romanconverter.controller.RomanConversionControllerTest.txt
+    │   ├── org.romanconverter.integration.ConversionIntegrationTest.txt
+    │   ├── org.romanconverter.service.RomanConversionServiceTest.txt
+    │   └── org.romanconverter.validator.ConversionValidatorTest.txt
+    └── test-classes
+        ├── logback-test.xml
+        └── org
+            └── romanconverter
+                ├── RomanConverterApplicationTests.class
+                ├── config
+                │   └── TestSecurityConfig.class
+                ├── controller
+                │   └── RomanConversionControllerTest.class
+                ├── integration
+                │   └── ConversionIntegrationTest.class
+                ├── service
+                │   └── RomanConversionServiceTest.class
+                └── validator
+                    └── ConversionValidatorTest.class
+
+76 directories, 96 files
+
 ```
 
 
@@ -585,6 +674,8 @@ RomanConverter
   - https://spring.io/guides/gs/securing-web
   - https://spring.io/guides/gs/testing-web
   - https://junit.org/junit5/docs/snapshot/user-guide/#writing-tests-assertions
+- Roman Number Vinculum format
+  - https://aceonlinetools.com/utility/number-to-roman-numeral-converter/
 - Docker
   - https://docs.spring.io/spring-boot/how-to/docker-compose.html
 - OpenTelemetry
