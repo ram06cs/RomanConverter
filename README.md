@@ -5,26 +5,26 @@ RomanConverter is a Spring Boot application that converts numbers to Roman numer
 ## **Author**
    - **Name:** Ram Kumar Balasubramani
    - **Email:** ram.06cs@gmail.com 
-
 ## Table of Contents
 1. [Project Overview](#project-overview)
-   - 1.1 [Logging Architecture](#logging-architecture)
-   - 1.2 [Metrics Architecture](#metrics-architecture)
-   - 1.3 [Monitoring Architecture](#monitoring-architecture)
+    - 1.1 [Logging Architecture](#logging-architecture)
+    - 1.2 [Metrics Architecture](#metrics-architecture)
+    - 1.3 [Monitoring Architecture](#monitoring-architecture)
 2. [Getting Started](#getting-started)
-   - 2.1 [Prerequisites](#prerequisites)
-   - 2.2 [Installation](#installation)
+    - 2.1 [Prerequisites](#prerequisites)
+    - 2.2 [Installation](#installation)
 3. [Service Endpoints](#service-endpoints)
 4. [Application Usage and Monitoring](#application-usage-and-monitoring)
-   - 4.1 [Access Application via REST Endpoint](#access-application-via-rest-endpoint)
-   - 4.2 [Access Swagger](#access-swagger)
-   - 4.3 [Access Prometheus](#access-prometheus)
-   - 4.4 [View Logs from Kibana](#view-logs-from-kibana)
-   - 4.5 [Monitoring Metrics via Grafana](#monitoring-metrics-via-grafana)
+    - 4.1 [Access Application via REST Endpoint](#access-application-via-rest-endpoint)
+    - 4.2 [Access Swagger](#access-swagger)
+    - 4.3 [Access Prometheus](#access-prometheus)
+    - 4.4 [View Logs from Kibana](#view-logs-from-kibana)
+    - 4.5 [Monitoring Metrics via Grafana](#monitoring-metrics-via-grafana)
 5. [Running Test Suite](#running-test-suite)
 6. [Shutting Down the Services](#shutting-down-the-services)
 7. [Project Structure](#project-structure)
 8. [References](#references)
+
 
 ## 1. **Project Overview**
   
@@ -140,7 +140,7 @@ The RomanConverter project utilizes several components for robust functionality,
 
 ## 2. **Getting Started**
 
-## 2.1 **Prerequisites**
+### 2.1 **Prerequisites**
 Ensure that the following software is installed on your system and environment variables are set
    - Java 17 or later
    - Apache Maven 3.9.4 or later
@@ -167,7 +167,6 @@ Additionally, make sure that the following ports are not used by other applicati
 This ensures that there are no port conflicts when starting the services.
 
 ### 2.2 **Installation Steps**
-
 
 1. Clone the Repository 
     ```sh
@@ -341,7 +340,7 @@ This ensures that there are no port conflicts when starting the services.
 
 </details>
 
-### 4.2 **Access Swagger for the Spring Boot Application:**
+### 4.2 **Access Swagger**
 - URL: `http://localhost:8080/swagger-ui/index.html`
    - Log into Swagger, click the GET request dropdown, and use the "Try it out" button to test the endpoint.
 

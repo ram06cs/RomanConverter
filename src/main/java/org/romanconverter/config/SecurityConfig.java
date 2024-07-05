@@ -24,7 +24,7 @@ public class SecurityConfig {
 
     private static final String[] AUTH_WHITELIST = {
             "/actuator/**",
-            // other public endpoints
+            // endpoints which need public access can be added here
     };
 
     @Bean
@@ -36,12 +36,7 @@ public class SecurityConfig {
                 )
                 .httpBasic()
                 .and()
-                .formLogin(form -> form
-                        .permitAll()
-                )
-                .logout(logout -> logout
-                        .permitAll()
-                );
+                .csrf().disable();
         return http.build();
     }
 
