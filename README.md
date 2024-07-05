@@ -5,25 +5,26 @@ RomanConverter is a Spring Boot application that converts numbers to Roman numer
 ## **Author**
    - **Name:** Ram Kumar Balasubramani
    - **Email:** ram.06cs@gmail.com 
+
 ## Table of Contents
-1. [Project Overview](#project-overview)
-    - 1.1 [Logging Architecture](#logging-architecture)
-    - 1.2 [Metrics Architecture](#metrics-architecture)
-    - 1.3 [Monitoring Architecture](#monitoring-architecture)
-2. [Getting Started](#getting-started)
-    - 2.1 [Prerequisites](#prerequisites)
-    - 2.2 [Installation](#installation)
-3. [Service Endpoints](#service-endpoints)
-4. [Application Usage and Monitoring](#application-usage-and-monitoring)
-    - 4.1 [Access Application via REST Endpoint](#access-application-via-rest-endpoint)
-    - 4.2 [Access Swagger](#access-swagger)
-    - 4.3 [Access Prometheus](#access-prometheus)
-    - 4.4 [View Logs from Kibana](#view-logs-from-kibana)
-    - 4.5 [Monitoring Metrics via Grafana](#monitoring-metrics-via-grafana)
-5. [Running Test Suite](#running-test-suite)
-6. [Shutting Down the Services](#shutting-down-the-services)
-7. [Project Structure](#project-structure)
-8. [References](#references)
+1. [Project Overview](#1-project-overview)
+    - 1.1 [Logging Architecture](#11-logging-architecture)
+    - 1.2 [Metrics Architecture](#12-metrics-architecture)
+    - 1.3 [Monitoring Architecture](#13-monitoring-architecture)
+2. [Getting Started](#2-getting-started)
+    - 2.1 [Prerequisites](#21-prerequisites)
+    - 2.2 [Installation](#22-installation)
+3. [Service Endpoints](#3-service-endpoints)
+4. [Application Usage and Monitoring](#4-application-usage-and-monitoring)
+    - 4.1 [Access Application via REST Endpoint](#41-access-application-via-rest-endpoint)
+    - 4.2 [Access Swagger](#42-access-swagger)
+    - 4.3 [Access Prometheus](#43-access-prometheus)
+    - 4.4 [View Logs from Kibana](#44-view-logs-from-kibana)
+    - 4.5 [Monitoring Metrics via Grafana](#45-monitoring-metrics-via-grafana)
+5. [Running Test Suite](#5-running-test-suite)
+6. [Shutting Down the Services](#6-shutting-down-the-services)
+7. [Project Structure](#7-project-structure)
+8. [References](#8-references)
 
 
 ## 1. **Project Overview**
