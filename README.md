@@ -346,6 +346,7 @@ This ensures that there are no port conflicts when starting the services.
    - Log into Swagger, click the GET request dropdown, and use the "Try it out" button to test the endpoint.
 
 ![Swagger1.png](screenshots/Swagger1.png)
+Swagger Response
 ![Swagger2.png](screenshots/Swagger2.png)
 
 ### 4.3 **Access Prometheus:**
