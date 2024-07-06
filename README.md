@@ -405,6 +405,9 @@ This ensures that there are no port conflicts when starting the services.
 
 **Spring Boot Statistics:**
 ![grafana_spring_boot_1.png](screenshots/grafana_spring_boot_1.png)
+
+Other metrics section
+
 ![grafana_spring_boot_2.png](screenshots/grafana_spring_boot_2.png)
 
 **OpenTelemetry Monitoring:**
